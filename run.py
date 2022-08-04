@@ -13,7 +13,6 @@ logging.info(f"Iterating over all {len(all_videos)} music videos")
 updated = 0
 for video in all_videos:
     if len(video.labels) == 0:  # for simplicity, just assume any labels means there's nothing to do
-        playlist = video.locations[0].split("/")[4]  # for simplicity, we don't do any safety checks here
         video.addLabel(video.locations[0].split("/")[4])
         updated += 1
 
