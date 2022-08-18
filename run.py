@@ -1,6 +1,7 @@
 import os
 from plexapi.server import PlexServer
 import logging
+import time
 
 logging.getLogger().setLevel(os.environ.get('LOG_LEVEL', logging.INFO))
 
@@ -13,6 +14,10 @@ if os.environ.get('GENRE_TAGS') is not None:
 
 logging.info(f"Logging into Plex @ {os.environ.get('PLEX_URL')}")
 plex = PlexServer(os.environ.get('PLEX_URL'), os.environ.get('PLEX_TOKEN'))
+
+logging.info(f"Refreshing Library")
+plex.library.section("Music Videos").update()
+time.sleep(30)
 
 all_videos = plex.library.section('Music Videos').all()
 logging.info(f"Iterating over all {len(all_videos)} music videos")
